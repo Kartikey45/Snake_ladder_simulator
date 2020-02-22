@@ -12,7 +12,7 @@ do
 	#GENERATE RANDOM VARIABLES
 	randomDiceNumber=$(( RANDOM%6+1 ))
 	randomCheck=$(( RANDOM%3 ))
-	
+
 	#CHECK THE CONDITIONS
 	case $randomCheck in
 		1)
@@ -21,9 +21,11 @@ do
 			playerPosition=$(($playerPosition+$randomDiceNumber))
 			if [ $playerPosition -gt $END_POSITION ]
 			then
-				playerPosition=$END_POSITION
-				echo "Player position : $playerPosition"
-				echo "player won !!!"
+				playerPosition=$(($playerPosition-$randomDiceNumber))
+			elif [ $playerPosition -eq $END_POSITION ]
+			then
+				echo "Player position: $playerPosition"
+				echo "Player Won !!!!!!"
 				break
 			fi
 			echo "Player position: $playerPosition"
@@ -40,7 +42,7 @@ do
 			fi
 			echo "Player position: $playerPosition"
 			echo ""
-			;;	
+			;;
 		*)
 			echo "No play"
 			playerPosition=$playerPosition
@@ -48,10 +50,10 @@ do
 			echo ""
 			;;
 	esac
-
+		
 	#CONDITION CHECK FOR PLAYER'S POSITION
 	if [ $playerPosition -lt $START_POSITION ]
 	then
 		playerPosition=$START_POSITION
-	fi	
+	fi
 done
